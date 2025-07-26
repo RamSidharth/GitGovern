@@ -1,122 +1,101 @@
-GitGovern
+# GitGovern - Terraform-based GitHub Organization Management
+
+## Overview
 Terraform-based Infrastructure-as-Code project to manage GitHub organizations. Automate creation and management of teams, members, repositories, and permissions with reproducible and version-controlled configuration.
 
-Prerequisites
-Terraform installed (v1.x recommended) — Terraform Install Guide
+---
 
-GitHub Personal Access Token with appropriate scopes (repo, admin:org) — GitHub PAT Guide
+## Prerequisites
+- Terraform installed (v1.x recommended) — see Terraform Install Guide
+- GitHub Personal Access Token with scopes: `repo`, `admin:org` — see GitHub PAT Guide
+- Git installed (optional, for cloning repo)
 
-Git installed (optional, for cloning repo)
+---
 
-Setup Instructions
-1. Clone the Repository
-bash
+## Setup Instructions
+
+### 1. Clone the Repository
 git clone https://github.com/RamSidharth/GitGovern.git
 cd GitGovern
-2. Create .env File to Store Environment Variables
-Create a file named .env in the root directory or just rename the .env.sample to .env, to hold your sensitive environment variables:
 
-bash
-# .env example
 
-# GitHub Personal Access Token (with repo and org permissions)
-GITHUB_TOKEN="your_github_personal_access_token"
+### 2. Create `.env` File for Environment Variables
+Create a file named `.env` in the root directory or rename `.env.sample` to `.env` with contents:
 
-# GitHub organization or owner name exactly as it appears on GitHub
-GITHUB_OWNER="your_github_org_name_or_username"
-3. Loading Environment Variables Before Running Terraform
-Terraform uses these environment variables automatically if they are set in your shell.
+.env example
+GITHUB_TOKEN="your_github_personal_access_token" # GitHub PAT with repo & org scopes
+GITHUB_OWNER="your_github_org_name_or_username" # GitHub org or user name exactly as on GitHub
 
-3.a. On Linux/macOS (bash or zsh)
-Load variables from .env file with:
 
-bash
-set -a          # auto-export all variables
+### 3. Loading Environment Variables Before Running Terraform
+
+- **Linux/macOS (bash or zsh):**
+set -a # auto-export all variables
 source .env
 set +a
-Then run Terraform commands in the same terminal session.
 
-3.b. On Windows PowerShell
-PowerShell doesn't support set -a or source. Use the following script to load your .env file variables for the session:
+Run Terraform commands in the same terminal session.
 
-powershell
+- **Windows PowerShell:**
 Get-Content .env | ForEach-Object {
-  if ($_ -match '^\s*([^=]+?)\s*=\s*(.+)$') {
-    $name = $matches[1]
-    $value = $matches[2].Trim('"')
-    [System.Environment]::SetEnvironmentVariable($name, $value, "Process")
-  }
-}
-Alternatively, you can manually set the variables:
+if ($_ -match '^\s*([^=]+?)\s*=\s*(.+)$') {
+$name = $matches
+$value = $matches.Trim('"')
+[System.Environment]::SetEnvironmentVariable($name, $value, "Process")
 
-powershell
+Or set manually:
+
 $env:GITHUB_TOKEN="your_github_personal_access_token"
 $env:GITHUB_OWNER="your_github_org_name_or_username"
-3.c. On Windows Command Prompt (cmd.exe)
-Set environment variables in the current session:
 
-text
+
+- **Windows Command Prompt (cmd.exe):**
+
 set GITHUB_TOKEN=your_github_personal_access_token
 set GITHUB_OWNER=your_github_org_name_or_username
-Then run Terraform commands in the same window.
 
-4. Terraform Commands
-Run these commands in your project root directory:
+Run Terraform commands in the same window.
 
-Initialize Terraform
-bash
+---
+
+### 4. Terraform Commands (run in project root)
+
+- Initialize Terraform:
+
 terraform init
-Validate Terraform Configuration
-bash
+
+- Validate configuration:
+
 terraform validate
-Preview Planned Changes
-bash
+
+- Preview planned changes:
+  
 terraform plan
-Apply the Configuration (create/update resources)
-bash
+
+- Apply configuration (create/update resources):
+
 terraform apply
-You will be prompted to confirm by typing yes.
 
-Optionally skip confirmation (use with care):
+- Destroy all managed resources (optional cleanup):
 
-bash
-terraform apply -auto-approve
-Destroy All Managed Resources (optional cleanup)
-bash
 terraform destroy
-5. Workflow Notes
-The .auto.tfvars files present (e.g., teams.auto.tfvars, repositories.auto.tfvars) are automatically loaded by Terraform and define your team and repository configurations.
 
-Teams and their descriptions, members, and repository permissions are all managed declaratively.
 
-Changing .tfvars files and re-running terraform apply updates your GitHub organization accordingly.
+---
 
-Make sure to update .env file if your GitHub token or owner changes.
+### 5. Workflow Notes
+- `.auto.tfvars` files (e.g., `teams.auto.tfvars`, `repositories.auto.tfvars`) are auto-loaded by Terraform defining teams, members, repositories, and permissions declaratively.
+- Change `.tfvars` files and re-run `terraform apply` to update your GitHub organization.
+- Update `.env` file if GitHub token or owner changes.
 
-6. Recommended Git Ignore
-Make sure you have .env in .gitignore to avoid committing secrets:
+---
 
-text
-# .gitignore
+### 6. Recommended `.gitignore` Entries
+
 .env
 .terraform/
 *.tfstate
 *.tfstate.backup
-You can commit a .env.sample file with placeholder values to help collaborators:
 
-bash
-# .env.sample
 
-GITHUB_TOKEN="your_token_here"
-GITHUB_OWNER="your_org_here"
-Troubleshooting
-If teams or repositories fail to create, verify environment variables are loaded correctly.
-
-Use terraform plan to check changes before applying.
-
-If descriptions don’t appear, ensure the description attribute is provided in your teams.auto.tfvars and passed properly in main.tf.
-
-For permissions errors, verify your GitHub token scopes.
-
-Run terraform state list to see managed resources.
 
