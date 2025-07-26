@@ -21,8 +21,8 @@ git clone https://github.com/RamSidharth/GitGovern.git
 ### 2. Create `.env` File for Environment Variables
 Create a file named `.env` in the root directory or rename `.env.sample` to `.env` with contents:
 
-GITHUB_TOKEN="your_github_personal_access_token"           # GitHub PAT with repo & org scopes
-GITHUB_OWNER="your_github_org_name_or_username"            # GitHub org or user name exactly as on GitHub
+GITHUB_TOKEN="your_github_personal_access_token"          
+GITHUB_OWNER="your_github_org_name_or_username"           
 
 
 ### 3. Loading Environment Variables Before Running Terraform
@@ -37,24 +37,24 @@ Run Terraform commands in the same terminal session.
 
 - **Windows PowerShell:**
 
-Get-Content .env | ForEach-Object {
-if ($_ -match '^\s*([^=]+?)\s*=\s*(.+)$') {
-$name = $matches
-$value = $matches.Trim('"')
-[System.Environment]::SetEnvironmentVariable($name, $value, "Process")
+  Get-Content .env | ForEach-Object {
+  if ($_ -match '^\s*([^=]+?)\s*=\s*(.+)$') {
+  $name = $matches
+  $value = $matches.Trim('"')
+  [System.Environment]::SetEnvironmentVariable($name, $value, "Process")
 
-Or set manually:
-
-$env:GITHUB_TOKEN="your_github_personal_access_token"
-
-$env:GITHUB_OWNER="your_github_org_name_or_username"
+  Or set manually:
+  
+  $env:GITHUB_TOKEN="your_github_personal_access_token"
+  
+  $env:GITHUB_OWNER="your_github_org_name_or_username"
 
 
 - **Windows Command Prompt (cmd.exe):**
 
-set GITHUB_TOKEN=your_github_personal_access_token
-
-set GITHUB_OWNER=your_github_org_name_or_username
+  set GITHUB_TOKEN=your_github_personal_access_token
+  
+  set GITHUB_OWNER=your_github_org_name_or_username
 
 ---
 
@@ -62,23 +62,23 @@ set GITHUB_OWNER=your_github_org_name_or_username
 
 - Initialize Terraform:
 
-terraform init
+  terraform init
 
 - Validate configuration:
 
-terraform validate
+  terraform validate
 
 - Preview planned changes:
   
-terraform plan
+  terraform plan
 
 - Apply configuration (create/update resources):
 
-terraform apply
+  terraform apply
 
 - Destroy all managed resources (optional cleanup):
 
-terraform destroy
+  terraform destroy
 
 
 ---
