@@ -1,11 +1,12 @@
 variable "teams" {
   description = "List of teams and their members"
   type = list(object({
-    name     = string
-    privacy  = string   # "closed" or "secret"
-    members  = list(object({
+    name        = string
+    description = string           # Add this line here
+    privacy     = string           # "closed" or "secret"
+    members     = list(object({
       username = string
-      role     = string # "member" or "maintainer"
+      role     = string            # "member" or "maintainer"
     }))
   }))
   default = []
