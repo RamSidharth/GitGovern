@@ -16,10 +16,10 @@ variable "privacy" {
 }
 
 variable "members" {
-  description = "List of maps defining team membership"
+  description = "List of users (and their roles) to add to this team"
   type = list(object({
-    username = string  # GitHub username
-    role     = string  # 'member' or 'maintainer'
+    username = string   # GitHub login of the user
+    role     = string   # 'member' or 'maintainer'
   }))
   default = []
 }
