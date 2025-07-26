@@ -16,27 +16,27 @@ Terraform-based Infrastructure-as-Code project to manage GitHub organizations. A
 
 ### 1. Clone the Repository
 git clone https://github.com/RamSidharth/GitGovern.git
-cd GitGovern
 
 
 ### 2. Create `.env` File for Environment Variables
 Create a file named `.env` in the root directory or rename `.env.sample` to `.env` with contents:
 
-.env example
-GITHUB_TOKEN="your_github_personal_access_token" # GitHub PAT with repo & org scopes
-GITHUB_OWNER="your_github_org_name_or_username" # GitHub org or user name exactly as on GitHub
+GITHUB_TOKEN="your_github_personal_access_token"           # GitHub PAT with repo & org scopes
+GITHUB_OWNER="your_github_org_name_or_username"            # GitHub org or user name exactly as on GitHub
 
 
 ### 3. Loading Environment Variables Before Running Terraform
 
 - **Linux/macOS (bash or zsh):**
-set -a # auto-export all variables
+  
+set -a 
 source .env
 set +a
 
 Run Terraform commands in the same terminal session.
 
 - **Windows PowerShell:**
+
 Get-Content .env | ForEach-Object {
 if ($_ -match '^\s*([^=]+?)\s*=\s*(.+)$') {
 $name = $matches
@@ -46,15 +46,15 @@ $value = $matches.Trim('"')
 Or set manually:
 
 $env:GITHUB_TOKEN="your_github_personal_access_token"
+
 $env:GITHUB_OWNER="your_github_org_name_or_username"
 
 
 - **Windows Command Prompt (cmd.exe):**
 
 set GITHUB_TOKEN=your_github_personal_access_token
-set GITHUB_OWNER=your_github_org_name_or_username
 
-Run Terraform commands in the same window.
+set GITHUB_OWNER=your_github_org_name_or_username
 
 ---
 
@@ -93,8 +93,11 @@ terraform destroy
 ### 6. Recommended `.gitignore` Entries
 
 .env
+
 .terraform/
+
 *.tfstate
+
 *.tfstate.backup
 
 
