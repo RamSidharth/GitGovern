@@ -3,15 +3,15 @@ teams = [
     name     = "Developers"
     privacy  = "closed"
     members  = [
-      { username = "alice", role = "maintainer" },
-      { username = "bob",   role = "member" }
+      { username = "", role = "maintainer" },  # Add the username
+      { username = "",   role = "member" }    # Add the username
     ]
   },
   {
     name     = "Ops"
     privacy  = "closed"
     members  = [
-      { username = "carol", role = "member" }
+      { username = "", role = "member" }    # Add the username
     ]
   }
 ]
