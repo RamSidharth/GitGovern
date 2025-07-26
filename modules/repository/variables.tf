@@ -9,16 +9,22 @@ variable "description" {
 }
 
 variable "visibility" {
-  description = "Repository visibility: 'private' or 'public'"
+  description = "Repository visibility: private or public"
   type        = string
   default     = "private"
 }
 
 variable "teams" {
-  description = "List of maps specifying teams and their permission on this repo"
+  description = "List of teams and permissions assigned to this repo"
   type = list(object({
-    team       = string      # Team name
-    permission = string      # One of: pull, push, admin, maintain
+    team       = string
+    permission = string
   }))
   default = []
+}
+
+variable "team_ids" {
+  description = "Map of team names to their GitHub IDs, passed from the team module"
+  type        = map(string)
+  default     = {}
 }
