@@ -29,18 +29,24 @@ GITHUB_OWNER="your_github_org_name_or_username"
 
 - **Linux/macOS (bash or zsh):**
   
-set -a 
-source .env
-set +a
-
-Run Terraform commands in the same terminal session.
+  set -a 
+  
+  source .env
+  
+  set +a
+  
+  Run Terraform commands in the same terminal session.
 
 - **Windows PowerShell:**
 
   Get-Content .env | ForEach-Object {
+  
   if ($_ -match '^\s*([^=]+?)\s*=\s*(.+)$') {
+  
   $name = $matches
+  
   $value = $matches.Trim('"')
+  
   [System.Environment]::SetEnvironmentVariable($name, $value, "Process")
 
   Or set manually:
