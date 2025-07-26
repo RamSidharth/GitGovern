@@ -49,7 +49,11 @@ GITHUB_OWNER="your_github_org_name_or_username"
   
   [System.Environment]::SetEnvironmentVariable($name, $value, "Process")
 
-  Or set manually:
+  
+
+  *Or set manually:*
+
+  
   
   $env:GITHUB_TOKEN="your_github_personal_access_token"
   
