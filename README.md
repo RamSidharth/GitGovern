@@ -39,22 +39,7 @@ GITHUB_OWNER="your_github_org_name_or_username"
 
 - **Windows PowerShell:**
 
-  Get-Content .env | ForEach-Object {
-  
-  if ($_ -match '^\s*([^=]+?)\s*=\s*(.+)$') {
-  
-  $name = $matches
-  
-  $value = $matches.Trim('"')
-  
-  [System.Environment]::SetEnvironmentVariable($name, $value, "Process")
 
-  
-
-  *Or set manually:*
-
-  
-  
   $env:GITHUB_TOKEN="your_github_personal_access_token"
   
   $env:GITHUB_OWNER="your_github_org_name_or_username"
